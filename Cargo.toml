@@ -1,0 +1,13 @@
+[package]
+name = "bpm"
+version = "0.1.2"
+edition = "2024"
+authors = ["Your Name <you@example.com>"]
+description = "Bpm - local binary package manager using CalcBits"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.7"
+calcbits = "0.1.1"  # <--- CalcBits for progress calculations
