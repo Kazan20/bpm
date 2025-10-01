@@ -203,7 +203,7 @@ fn main() {
         "/l" => list_installed(&bpm_store),
         "/v" => println!("bpm ver: {}", BPM_VERSION),
         "/h" => {
-            println!("Blur Package Manager | Help Menu\n/i = install\n/r = remove\n/u = update\n/l = list installed packages\n/v = shows version\n/h = shows this menu");
+            println!("Blur Package Manager | Help Menu\n/i = install\n /r = remove\n  /u = update\n   /l = list installed packages\n    /v = shows version\n     /h = shows this menu");
         }
         _ => println!("Unknown command. Use /i, /r, /u, /l"),
     }
