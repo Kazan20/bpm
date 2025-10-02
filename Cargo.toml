@@ -1,5 +1,5 @@
 [package]
-name = "bpm"
+name = "bpma" # added an a because there is already a package called bpm
 version = "0.1.2"
 edition = "2024"
 authors = ["Ariel Zvinowanda <taperazvi@gmail.com>"]
