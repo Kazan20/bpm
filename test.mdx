@@ -1,0 +1,118 @@
+import { Note, Example, CodeBlock, Badge } from '@theme/Components';
+
+# Blur Package Manager (bpm) <Badge text="Cargo" type="secondary" link="https://crates.io/crates/bpm" />
+
+**bpm** is a simple, local, binary-based package manager written in **Rust** with support for dependency resolution.  
+It uses `.mri` (**Magnet Remote Installer**) files in TOML format to describe available packages and their dependencies.  
+
+---
+
+## 📦 Features
+
+<Note type="info">
+- ✅ Local **binary-based** package management  
+- 📂 `.mri` TOML repositories for easy package definitions  
+- ⚡ Dependency resolution (installs required packages first)  
+- 📊 Uses [calcbits](https://crates.io/crates/calcbits) for progress bars and storage  
+- 📝 Installed packages are tracked in `installed.json`  
+- 🌐 Supports multiple repositories  
+- 🔌 Works completely **offline** (local paths as repos) for now...
+</Note>
+
+---
+
+## 📂 Directory Layout
+
+By default, bpm lives in:
+
+<CodeBlock language="text">
+C:/Users/User/Bpm-Store/
+├── bins/               # Installed binaries go here
+├── main/               # Example repo
+│   └── packages.mri    # Repo index (TOML)
+├── installed.json      # Installed packages DB
+└── packages.db         # Binary storage (via calcbits)
+</CodeBlock>
+
+---
+
+## 📑 Example `.mri` File
+
+Example `packages.mri`:
+
+<CodeBlock language="toml">
+[neovim."0.9.0"]
+path = "C:/Users/User/Bpm-Store/main/neovim-0.9.0"
+binaries = ["nvim.exe"]
+dependencies = ["libuv:1.0.0"]
+
+[libuv."1.0.0"]
+path = "C:/Users/User/Bpm-Store/main/libuv-1.0.0"
+binaries = ["libuv.dll"]
+</CodeBlock>
+
+<Note type="tip">
+Installing `main:neovim` will automatically install `libuv:1.0.0` first.
+</Note>
+
+---
+
+## ⚡ Usage
+
+<CodeBlock language="text">
+bpm /i <repo:package[:version]>   # Install a package
+bpm /r <package>                  # Remove a package
+bpm /u <repo:package>             # Update package to latest version
+bpm /l                            # List installed packages
+bpm /v                            # Show bpm version
+bpm /h                            # Help menu
+</CodeBlock>
+
+### Examples
+
+<Example>
+bpm /i main:neovim         # Install latest version of neovim from 'main' repo  
+bpm /i main:neovim:0.9.0   # Install specific version  
+bpm /r neovim              # Remove package  
+bpm /u main:neovim         # Update neovim  
+bpm /l                     # List installed packages  
+</Example>
+
+---
+
+## 🛠 Development
+
+<Note type="info">
+To build bpm from source:
+</Note>
+
+<CodeBlock language="sh">
+git clone https://github.com/Kazan20/bpm.git
+cd bpm
+cargo build --release
+</CodeBlock>
+
+Binary will be at:
+
+<CodeBlock language="text">
+target/release/bpm.exe
+</CodeBlock>
+
+---
+
+## 🔮 Roadmap
+
+<Note type="info">
+* ✅ Dependency resolution  
+* ⏳ Remote repo fetching (git/http)  
+* ⏳ Better error messages  
+* ⏳ Search command for packages
+</Note>
+
+---
+
+## 📜 License
+
+MIT License.
+
+Check out [calcbits](https://github.com/Kazan20/calcbits) made by me.
